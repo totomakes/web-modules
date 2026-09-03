@@ -141,6 +141,7 @@
         chars.forEach((c, i) => c.style.setProperty('--i', i));
       },
       replay() {
+        el.classList.add('is-armed');
         el.classList.remove('is-in');
         void el.offsetWidth;                 // force reflow so the transitions restart
         requestAnimationFrame(() => el.classList.add('is-in'));
@@ -158,11 +159,18 @@
     el.__beacon = inst;
     instances.push(inst);
 
-    // run the entrance when the hero is on screen (or immediately if it already is)
-    const go = () => inst.replay();
+    // Run the entrance when the hero comes on screen — but never let that be the only path to
+    // visible content. The pre-entrance state only exists while `is-armed` is set, and a fallback
+    // timer plays it regardless, so a missed observer can't leave the hero blank.
+    el.classList.add('is-armed');
+    let played = false;
+    const go = () => { if (played) return; played = true; inst.replay(); };
     if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { go(); io.disconnect(); } }), { threshold: .15 });
+      const io = new IntersectionObserver((es) => {
+        es.forEach(e => { if (e.isIntersecting) { go(); io.disconnect(); } });
+      }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
       io.observe(el);
+      setTimeout(go, 1500);            // fail open if the observer never fires
     } else go();
     return inst;
   }
