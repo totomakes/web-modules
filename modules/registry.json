@@ -148,7 +148,7 @@
       "faq-rail.css"
     ],
     "support": "All modern browsers.",
-    "previewScroll": "faq",
+    "previewScroll": 1150,
     "added": "2026-09-03"
   },
   {
@@ -168,6 +168,7 @@
       "unfold-hero.css"
     ],
     "support": "All modern browsers.",
-    "added": "2026-09-03"
+    "added": "2026-09-03",
+    "previewScroll": 380
   }
 ]

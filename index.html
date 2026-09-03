@@ -154,7 +154,11 @@
       });
       fit(); addEventListener('resize', fit);
       grid.querySelectorAll('iframe').forEach(f => f.addEventListener('load', () => {
-        try { if (f.dataset.scroll === 'bottom') f.contentWindow.scrollTo(0, f.contentDocument.body.scrollHeight); } catch (e) {}
+        try {
+          const v = f.dataset.scroll;
+          if (v === 'bottom') f.contentWindow.scrollTo(0, f.contentDocument.body.scrollHeight);
+          else if (v) f.contentWindow.scrollTo(0, parseFloat(v) || 0);
+        } catch (e) {}
       }));
     } catch (e) {
       grid.innerHTML = '<p class="empty">Could not load modules/registry.json</p>';

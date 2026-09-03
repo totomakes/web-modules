@@ -29,6 +29,9 @@
   animation: orbit-turn var(--dur, 60s) linear infinite;
   transform-origin: 50% 50%;
 }
+/* an SVG <g> resolves transform-origin against its own bounding box by default, which is NOT the
+   centre of the diagram — the connectors would drift off the chips. view-box pins it to the svg. */
+.orbit__fan { transform-box: view-box; }
 .orbit__fan.is-still, .orbit__ring.is-still { animation: none; }
 .orbit:hover .orbit__fan, .orbit:hover .orbit__ring { animation-play-state: paused; }
 @keyframes orbit-turn { to { rotate: 360deg; } }

@@ -15,11 +15,11 @@
 }
 /* in scroll mode the section is tall and its inner block pins */
 .faqr--scroll .faqr__sticky { position: sticky; top: 0; min-height: 100vh; display: grid; align-content: center; }
-.faqr__sticky { display: grid; grid-template-columns: 296px 1fr; gap: 0; padding: 6vh 0; }
+.faqr__sticky { display: grid; grid-template-columns: 296px 1fr; gap: 0; padding: 4vh 0; align-items: start; }
 
 /* ── the rail ─────────────────────────────────────────────────────── */
 .faqr__rail {
-  position: relative; list-style: none; margin: 0; padding: 8px;
+  position: relative; list-style: none; margin: 0; padding: 8px 0 8px 8px;
   background: var(--faqr-tray);
   border-radius: var(--faqr-radius) 0 0 var(--faqr-radius);
   align-self: start;
@@ -46,7 +46,7 @@
 .faqr__panel {
   background: var(--faqr-tray);
   border-radius: 0 var(--faqr-radius) var(--faqr-radius) var(--faqr-radius);
-  padding: 8px;
+  padding: 8px 8px 8px 0;                  /* flush against the rail tray */
   min-height: 420px;
 }
 .faqr__group { display: grid; gap: 8px; }
