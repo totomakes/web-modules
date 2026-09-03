@@ -34,6 +34,8 @@
  *   spin      degrees/sec the whole diagram drifts (default 0)
  *
  * API: BeaconHero.init(sel) → instances; inst.replay() re-runs the entrance; inst.set({...})
+ * Fails open by design: the pre-entrance state is applied only after JS arms the hero, a timer
+ * plays it even if the observer never fires, and inside an iframe it renders the finished state.
  * Everything degrades to visible-and-still under prefers-reduced-motion.
  */
 (function () {
@@ -166,6 +168,10 @@
     // Run the entrance when the hero comes on screen — but never let that be the only path to
     // visible content. The pre-entrance state only exists while `is-armed` is set, and a fallback
     // timer plays it regardless, so a missed observer can't leave the hero blank.
+    // Inside an iframe the browser may suspend rAF and CSS transitions when the frame is clipped
+    // or scaled (a thumbnail preview, say), which would strand the entrance mid-flight. There we
+    // skip arming entirely and render the finished hero.
+    if (window.self !== window.top) return inst;
     el.classList.add('is-armed');
     let played = false;
     const go = () => { if (played) return; played = true; inst.replay(); };
