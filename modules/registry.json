@@ -73,5 +73,101 @@
     "support": "All modern browsers.",
     "previewScroll": "bottom",
     "added": "2026-09-03"
+  },
+  {
+    "slug": "grain-field",
+    "name": "Grain Field",
+    "summary": "An animated film-grain layer that boils over any section. One oversized tile of canvas-generated noise, jumped to a random offset every frame.",
+    "tags": [
+      "canvas noise",
+      "texture",
+      "live controls",
+      "js"
+    ],
+    "source": "https://oberon.framer.website/",
+    "sourceName": "oberon.framer.website",
+    "files": [
+      "grain-field.js",
+      "grain-field.css"
+    ],
+    "support": "All modern browsers. mix-blend-mode overlay needs a non-transparent backdrop.",
+    "added": "2026-09-03"
+  },
+  {
+    "slug": "beacon-hero",
+    "name": "Beacon Hero",
+    "summary": "A blueprint-grid hero: hairline columns rule themselves in, the headline resolves character by character, and a centre mark deploys satellite nodes along dotted connectors.",
+    "tags": [
+      "text split",
+      "entrance",
+      "svg connectors",
+      "live controls"
+    ],
+    "source": "https://oberon.framer.website/",
+    "sourceName": "oberon.framer.website",
+    "files": [
+      "beacon-hero.js",
+      "beacon-hero.css"
+    ],
+    "support": "All modern browsers.",
+    "added": "2026-09-03"
+  },
+  {
+    "slug": "orbit-stack",
+    "name": "Orbit Stack",
+    "summary": "An integrations diagram: logo chips on concentric rings that drift at their own speed, wired to a centre mark with dotted connectors. Hover isolates one path.",
+    "tags": [
+      "diagram",
+      "orbit",
+      "hover isolate",
+      "live controls"
+    ],
+    "source": "https://oberon.framer.website/",
+    "sourceName": "oberon.framer.website",
+    "files": [
+      "orbit-stack.js",
+      "orbit-stack.css"
+    ],
+    "support": "All modern browsers.",
+    "added": "2026-09-03"
+  },
+  {
+    "slug": "faq-rail",
+    "name": "FAQ Rail",
+    "summary": "A notched folder-tab rail beside an accordion. The section pins itself and each screenful of scroll steps to the next category, so the FAQ keeps going instead of ending.",
+    "tags": [
+      "scroll driven",
+      "accordion",
+      "sticky",
+      "a11y"
+    ],
+    "source": "https://makro.framer.website/",
+    "sourceName": "makro.framer.website",
+    "files": [
+      "faq-rail.js",
+      "faq-rail.css"
+    ],
+    "support": "All modern browsers.",
+    "previewScroll": "faq",
+    "added": "2026-09-03"
+  },
+  {
+    "slug": "unfold-hero",
+    "name": "Unfold Hero",
+    "summary": "A dashboard held in 3D perspective with UI cards scattered around it, flattening and snapping into place as you scroll. One progress value drives plate, cards and shadow.",
+    "tags": [
+      "3d transform",
+      "scroll driven",
+      "hero",
+      "live controls"
+    ],
+    "source": "https://makro.framer.website/home-alt",
+    "sourceName": "makro.framer.website",
+    "files": [
+      "unfold-hero.js",
+      "unfold-hero.css"
+    ],
+    "support": "All modern browsers.",
+    "added": "2026-09-03"
   }
 ]

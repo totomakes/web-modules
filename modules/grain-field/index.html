@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grain Field · Web Modules</title>
+<meta name="description" content="An animated film-grain layer that boils over any section, generated on a canvas so there is no image to ship. Extracted from oberon.framer.website.">
+<meta name="wm-module" content="grain-field">
+<meta name="wm-files" content="grain-field.js, grain-field.css">
+<meta name="wm-source" content="https://oberon.framer.website/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/module-page.css">
+<link rel="stylesheet" href="grain-field.css">
+<style>
+  :root { --ink: #202020; --paper: #f2f0ee; --orange: #e65800; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+  .note { position: fixed; top: 18px; left: 18px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; opacity: .55; z-index: 5; }
+  .panel { min-height: 100vh; display: grid; place-items: center; padding: 12vh 5vw; }
+  .panel--dark { background: var(--ink); color: var(--paper); }
+  .panel--orange { background: var(--orange); color: #fff; }
+  .inner { max-width: 900px; width: 100%; }
+  .eyebrow { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; opacity: .6; margin: 0 0 16px; display: flex; gap: 10px; align-items: center; }
+  .eyebrow i { width: 22px; height: 22px; display: grid; place-items: center; background: var(--orange); color: #fff; font-style: normal; font-size: 10px; }
+  h1, h2 { font-family: 'Archivo', system-ui, sans-serif; font-weight: 800; letter-spacing: -.03em; line-height: .95; margin: 0 0 22px; }
+  h1 { font-size: clamp(48px, 8vw, 104px); }
+  h2 { font-size: clamp(34px, 5vw, 64px); }
+  p.lede { max-width: 54ch; font-size: 15px; line-height: 1.65; opacity: .8; margin: 0 0 34px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.14); }
+  .panel--orange .cards { background: rgba(0,0,0,.16); border-color: rgba(0,0,0,.16); }
+  .card { background: var(--ink); padding: 24px 20px; }
+  .panel--orange .card { background: var(--orange); }
+  .card b { display: block; font-family: 'Archivo', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -.02em; margin-bottom: 6px; }
+  .card span { font-size: 12px; opacity: .65; }
+  .swatch { display: flex; gap: 0; margin-top: 30px; }
+  .swatch div { flex: 1; height: 54px; }
+</style>
+</head>
+<body>
+<div class="note">05 · grain field · sliders top right</div>
+
+<section class="panel panel--dark" data-grain='{"opacity":0.06,"fps":24}'>
+  <div class="inner">
+    <p class="eyebrow"><i>01</i> pricing</p>
+    <h1>Grain that<br>boils.</h1>
+    <p class="lede">One oversized layer of repeating noise, jumped to a random offset every frame. Because the tile repeats and the layer is four times the size of the box, the shift reads as grain, not as a moving picture. The texture is drawn on a canvas at load, so there is no image file to ship.</p>
+    <div class="cards">
+      <div class="card"><b>$179</b><span>Starter · monthly</span></div>
+      <div class="card"><b>$820</b><span>Growth · monthly</span></div>
+      <div class="card"><b>$5299</b><span>Scale · annual</span></div>
+    </div>
+    <div class="swatch">
+      <div style="background:#2a2a2a"></div><div style="background:#3a3a3a"></div>
+      <div style="background:#4a4a4a"></div><div style="background:#5a5a5a"></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel panel--orange" data-grain='{"opacity":0.09,"fps":18,"blend":"overlay"}'>
+  <div class="inner">
+    <p class="eyebrow" style="opacity:.75"><i style="background:#fff;color:var(--orange)">02</i> over colour</p>
+    <h2>It bites into flat colour.</h2>
+    <p class="lede">On a saturated field, <b>mix-blend-mode: overlay</b> pushes the grain into the colour instead of laying grey on top. Same layer, different blend.</p>
+  </div>
+</section>
+
+<section class="panel" data-grain='{"opacity":0.045,"fps":12,"size":200,"scale":1.5}'>
+  <div class="inner">
+    <p class="eyebrow"><i>03</i> on paper</p>
+    <h2>And it ages paper.</h2>
+    <p class="lede">Coarser tile, slower refresh, lower opacity. The section stops looking like a flat screen and starts looking printed. All three panels on this page run their own instance with their own settings.</p>
+  </div>
+</section>
+
+<script src="grain-field.js"></script>
+<script src="../../assets/module-page.js"></script>
+<script src="../../assets/controls.js"></script>
+<script>
+  function buildPanel() {
+    if (document.documentElement.classList.contains('wm-embed')) return;
+    const D = GrainField.DEFAULTS;
+    WMControls.create({
+      title: 'Grain Field',
+      defaults: D,
+      schema: [
+        { key: 'opacity', label: 'Opacity',  hint: 'strength of the grain',   min: 0, max: .3,  step: .005 },
+        { key: 'fps',     label: 'Refresh',  hint: 'fps · 0 = frozen grain',  min: 0, max: 60,  step: 1 },
+        { key: 'size',    label: 'Tile',     hint: 'px · noise repeat size',  min: 32, max: 400, step: 8, unit: 'px' },
+        { key: 'scale',   label: 'Zoom',     hint: 'grain px per screen px',  min: .5, max: 4,  step: .1 },
+        { key: 'density', label: 'Density',  hint: 'share of pixels grained', min: .05, max: 1, step: .01 },
+        { key: 'spread',  label: 'Spread',   hint: '% oversize · travel room', min: 20, max: 300, step: 10, unit: '%' },
+      ],
+      onChange: (v) => GrainField.setAll(v),
+      snippet: (v) => {
+        const d = {}; Object.keys(D).forEach(k => { if (v[k] !== D[k]) d[k] = v[k]; });
+        const a = Object.keys(d).length ? " data-grain='" + JSON.stringify(d) + "'" : ' data-grain';
+        return '<section class="my-section"' + a + '>\n  …your content…\n</section>';
+      }
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', buildPanel); else buildPanel();
+</script>
+</body>
+</html>

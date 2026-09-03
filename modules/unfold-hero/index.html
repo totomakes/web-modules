@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unfold Hero · Web Modules</title>
+<meta name="description" content="A dashboard held in 3D perspective with UI cards scattered around it, flattening and snapping into place as you scroll. Extracted from makro.framer.website/home-alt.">
+<meta name="wm-module" content="unfold-hero">
+<meta name="wm-files" content="unfold-hero.js, unfold-hero.css">
+<meta name="wm-source" content="https://makro.framer.website/home-alt">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/module-page.css">
+<link rel="stylesheet" href="unfold-hero.css">
+<style>
+  :root { --ink: #21222f; --page: #f6f7fb; --lime: #d7f24a; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--page); color: var(--ink); font-family: 'Instrument Sans', system-ui, sans-serif; }
+  .note { position: fixed; top: 18px; left: 18px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; opacity: .5; z-index: 9; }
+  .unfold { padding: 16vh clamp(20px, 5vw, 90px) 0; }
+  .kicker { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .5; margin: 0 0 16px; }
+  h1 { font-size: clamp(40px, 6.6vw, 76px); font-weight: 600; letter-spacing: -.04em; line-height: 1.02; margin: 0 0 18px; }
+  .unfold__copy p { max-width: 46ch; margin: 0 auto 28px; color: rgba(36,36,38,.7); font-size: 16px; line-height: 1.6; }
+  .cta { display: inline-flex; align-items: center; gap: 12px; background: var(--ink); color: #fff; text-decoration: none; padding: 14px 14px 14px 22px; border-radius: 20px; font-size: 15px; font-weight: 500; transition: transform .5s cubic-bezier(.2,1.4,.3,1); }
+  .cta:hover { transform: translateY(-2px); }
+  .cta i { width: 34px; height: 34px; border-radius: 12px; background: var(--lime); color: var(--ink); display: grid; place-items: center; font-style: normal; }
+  .unfold__stage { max-width: 1180px; margin: 60px auto 0; }
+  /* the fake dashboard */
+  .shot { background: #fff; }
+  .shot__bar { display: flex; align-items: center; gap: 8px; padding: 14px 18px; border-bottom: 1px solid rgba(33,34,47,.08); }
+  .shot__bar u { width: 10px; height: 10px; border-radius: 50%; background: rgba(33,34,47,.14); display: block; }
+  .shot__body { display: grid; grid-template-columns: 200px 1fr; min-height: 440px; }
+  .shot__side { border-right: 1px solid rgba(33,34,47,.08); padding: 18px; display: grid; gap: 10px; align-content: start; }
+  .shot__side em { display: block; height: 12px; border-radius: 4px; background: rgba(33,34,47,.08); font-style: normal; }
+  .shot__side em:first-child { background: var(--lime); width: 60%; }
+  .shot__main { padding: 24px; display: grid; gap: 18px; align-content: start; }
+  .shot__row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .shot__tile { border: 1px solid rgba(33,34,47,.08); border-radius: 12px; padding: 16px; }
+  .shot__tile b { display: block; font-size: 24px; font-weight: 600; letter-spacing: -.02em; }
+  .shot__tile span { font-size: 11px; opacity: .55; }
+  .shot__chart { border: 1px solid rgba(33,34,47,.08); border-radius: 12px; padding: 18px; height: 220px; display: flex; align-items: flex-end; gap: 8px; }
+  .shot__chart i { flex: 1; background: rgba(33,34,47,.12); border-radius: 4px 4px 0 0; }
+  .shot__chart i:nth-child(4n) { background: var(--lime); }
+  .after { min-height: 90vh; display: grid; place-items: center; padding: 16vh 5vw 10vh; text-align: center; }
+  .after p { max-width: 56ch; color: rgba(36,36,38,.7); font-size: 15px; line-height: 1.7; }
+</style>
+</head>
+<body>
+<div class="note">09 · unfold hero · scroll to flatten</div>
+
+<section class="unfold" data-unfold='{"tilt":12,"lift":70}'>
+  <div class="unfold__copy">
+    <p class="kicker">AI-powered finance</p>
+    <h1>Know your cash.<br>Plan with AI.</h1>
+    <p>Stay on top of every transaction, and see what next quarter looks like before it arrives.</p>
+    <a class="cta" href="#">Get started <i>→</i></a>
+  </div>
+
+  <div class="unfold__stage">
+    <div class="unfold__plate">
+      <div class="shot">
+        <div class="shot__bar"><u></u><u></u><u></u></div>
+        <div class="shot__body">
+          <div class="shot__side"><em></em><em></em><em></em><em></em><em></em><em></em></div>
+          <div class="shot__main">
+            <div class="shot__row">
+              <div class="shot__tile"><b>$48,220</b><span>Projected balance</span></div>
+              <div class="shot__tile"><b>+12.4%</b><span>Month over month</span></div>
+              <div class="shot__tile"><b>13 wks</b><span>Runway modelled</span></div>
+            </div>
+            <div class="shot__chart"><i style="height:38%"></i><i style="height:56%"></i><i style="height:44%"></i><i style="height:72%"></i><i style="height:50%"></i><i style="height:64%"></i><i style="height:40%"></i><i style="height:80%"></i><i style="height:58%"></i><i style="height:68%"></i><i style="height:46%"></i><i style="height:88%"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="unfold__card unfold__card--keep" style="--top:6%;--left:-4%;--w:210px" data-dx="-150" data-dy="70" data-rot="-12" data-scale="1.12">
+      <b>$12,480</b><span>Incoming this week</span>
+      <div class="unfold__bar"><i style="height:40%"></i><i style="height:65%"></i><i style="height:100%"></i><i style="height:55%"></i><i style="height:72%"></i></div>
+    </div>
+    <div class="unfold__card" style="--top:2%;--right:-3%;--w:230px" data-dx="170" data-dy="-90" data-rot="10" data-scale="1.08">
+      <b>Forecast ready</b><span>13-week projection updated</span>
+      <svg class="unfold__spark" viewBox="0 0 200 40" preserveAspectRatio="none"><polyline points="0,32 25,26 50,29 75,18 100,22 125,12 150,16 175,6 200,9" fill="none" stroke="currentColor" stroke-width="2" opacity=".55"/></svg>
+    </div>
+    <div class="unfold__card" style="--bottom:-6%;--left:8%;--w:240px" data-dx="-120" data-dy="130" data-rot="8" data-scale="1.1">
+      <b>Unusual spend</b><span>3 transactions flagged for review</span>
+    </div>
+    <div class="unfold__card" style="--bottom:2%;--right:4%;--w:200px" data-dx="140" data-dy="120" data-rot="-9" data-scale="1.06">
+      <b>+$3,110</b><span>Versus last month</span>
+      <div class="unfold__bar"><i style="height:55%"></i><i style="height:35%"></i><i style="height:90%"></i><i style="height:60%"></i></div>
+    </div>
+  </div>
+</section>
+
+<section class="after">
+  <p>One scroll progress drives the plate and every card: the tilt eases to flat, the scatter collapses to each card's resting position, and the shadow tightens as the plate lands. Scroll back up to fold it again.</p>
+</section>
+
+<script src="unfold-hero.js"></script>
+<script src="../../assets/module-page.js"></script>
+<script src="../../assets/controls.js"></script>
+<script>
+  function buildPanel() {
+    if (document.documentElement.classList.contains('wm-embed')) return;
+    const D = UnfoldHero.DEFAULTS;
+    WMControls.create({
+      title: 'Unfold Hero',
+      defaults: { tilt: 12, perspect: D.perspect, lift: 70, travel: D.travel, spread: D.spread, float: D.float },
+      schema: [
+        { key: 'tilt',     label: 'Tilt',        hint: 'deg of rotateX at rest',  min: 0, max: 45, step: 1 },
+        { key: 'perspect', label: 'Perspective', hint: 'px · lower = stronger',   min: 400, max: 4000, step: 50, unit: 'px' },
+        { key: 'lift',     label: 'Lift',        hint: 'px the plate rises',      min: 0, max: 220, step: 5, unit: 'px' },
+        { key: 'travel',   label: 'Travel',      hint: 'screens of scroll',       min: .2, max: 2, step: .05 },
+        { key: 'spread',   label: 'Scatter',     hint: 'card throw multiplier',   min: 0, max: 3, step: .05 },
+        { key: 'float',    label: 'Idle drift',  hint: 'px · 0 = still',          min: 0, max: 24, step: 1, unit: 'px' },
+      ],
+      onChange: (v) => UnfoldHero.setAll(v),
+      snippet: (v) => {
+        const d = {}; Object.keys(D).forEach(k => { if (k in v && v[k] !== D[k]) d[k] = v[k]; });
+        const a = Object.keys(d).length ? " data-unfold='" + JSON.stringify(d) + "'" : ' data-unfold';
+        return '<section class="unfold"' + a + '>\n  <div class="unfold__copy"><h1>Your headline</h1></div>\n  <div class="unfold__stage">\n    <div class="unfold__plate"><img src="dashboard.png" alt="Dashboard"></div>\n    <div class="unfold__card" style="--top:6%;--left:-4%"\n         data-dx="-150" data-dy="70" data-rot="-12" data-scale="1.12">…</div>\n  </div>\n</section>';
+      }
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', buildPanel); else buildPanel();
+</script>
+</body>
+</html>

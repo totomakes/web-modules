@@ -28,7 +28,8 @@
 
   function create(cfg) {
     const defaults = Object.assign({}, cfg.defaults);
-    const values = Object.assign({}, defaults, readHash(cfg.schema));
+    const preset = readHash(cfg.schema);          // values carried in the URL, if any
+    const values = Object.assign({}, defaults, preset);
 
     const panel = document.createElement('aside');
     panel.className = 'wm-panel';
@@ -73,12 +74,16 @@
     });
     panel.querySelector('.wm-panel__toggle').addEventListener('click', (e) => {
       const c = panel.classList.toggle('is-collapsed'); e.target.textContent = c ? '+' : '–';
+      document.documentElement.classList.toggle('wm-panel-collapsed', c);
     });
     function flash(btn, txt) { const o = btn.textContent; btn.textContent = txt; setTimeout(() => btn.textContent = o, 1400); }
 
     document.body.appendChild(panel);
+    document.documentElement.classList.add('wm-has-panel');
     render();
-    cfg.onChange(values); // apply hash preset on load
+    // Only push values on load when the URL carried a preset. Otherwise each element keeps the
+    // settings written in its own data-* attribute until a slider is actually moved.
+    if (Object.keys(preset).length) cfg.onChange(values);
     return { el: panel, values, set(v) { Object.assign(values, v); render(); emit(); } };
   }
   window.WMControls = { create };

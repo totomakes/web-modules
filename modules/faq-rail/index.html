@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAQ Rail · Web Modules</title>
+<meta name="description" content="A category rail beside an accordion that advances as you scroll: the section pins and each screenful steps to the next category. Extracted from makro.framer.website.">
+<meta name="wm-module" content="faq-rail">
+<meta name="wm-files" content="faq-rail.js, faq-rail.css">
+<meta name="wm-source" content="https://makro.framer.website/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/module-page.css">
+<link rel="stylesheet" href="faq-rail.css">
+<style>
+  :root { --ink: #21222f; --page: #fff; --lime: #d7f24a; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--page); color: var(--ink); font-family: 'Instrument Sans', system-ui, sans-serif; }
+  .note { position: fixed; top: 18px; left: 18px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; opacity: .5; z-index: 9; }
+  .intro { min-height: 62vh; display: grid; place-items: center; text-align: center; padding: 14vh 5vw 6vh; }
+  .kicker { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .5; margin: 0 0 18px; }
+  h1 { font-size: clamp(38px, 6vw, 68px); font-weight: 600; letter-spacing: -.035em; line-height: 1.05; margin: 0 0 18px; }
+  h1 mark { background: var(--lime); color: inherit; padding: 0 .12em; border-radius: 6px; }
+  .intro p { max-width: 50ch; margin: 0 auto; color: rgba(36,36,38,.7); font-size: 16px; line-height: 1.6; }
+  .faqr { max-width: 1240px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
+  .outro { min-height: 70vh; display: grid; place-items: center; padding: 10vh 5vw; text-align: center; }
+  .outro p { max-width: 56ch; color: rgba(36,36,38,.7); font-size: 15px; line-height: 1.7; }
+</style>
+</head>
+<body>
+<div class="note">08 · faq rail · scroll through the categories</div>
+
+<section class="intro">
+  <div>
+    <p class="kicker">FAQ</p>
+    <h1>We have the <mark>answers</mark></h1>
+    <p>Keep scrolling. The section below pins itself and steps to the next category each screenful, so the FAQ keeps going instead of ending after one list.</p>
+  </div>
+</section>
+
+<section class="faqr" data-faq-rail='{"mode":"scroll","perStep":0.9}'>
+  <div class="faqr__sticky">
+    <ul class="faqr__rail">
+      <li><button type="button">General</button></li>
+      <li><button type="button">Forecasting</button></li>
+      <li><button type="button">Setup &amp; integrations</button></li>
+      <li><button type="button">Security and privacy</button></li>
+    </ul>
+
+    <div class="faqr__panel">
+      <div class="faqr__group">
+        <details class="faqr__q" style="--i:0" open><summary>What makes this different from a normal dashboard?</summary><div class="faqr__a">It is built for decisions, not reporting. Instead of only showing what happened, it tells you what is about to happen and what to do about it.</div></details>
+        <details class="faqr__q" style="--i:1"><summary>How does the AI help, in plain English?</summary><div class="faqr__a">It categorises and summarises activity, highlights what is unusual, and drafts the next action so you approve rather than assemble.</div></details>
+        <details class="faqr__q" style="--i:2"><summary>Who is it for?</summary><div class="faqr__a">Founders and small teams who need a finance view without hiring an analyst to maintain it.</div></details>
+        <details class="faqr__q" style="--i:3"><summary>Is there a free trial?</summary><div class="faqr__a">Fourteen days, no card. Your data stays yours if you leave.</div></details>
+      </div>
+
+      <div class="faqr__group">
+        <details class="faqr__q" style="--i:0" open><summary>How far ahead can it forecast?</summary><div class="faqr__a">Thirteen weeks by default, extendable to twelve months once there is enough history to be honest about the error bars.</div></details>
+        <details class="faqr__q" style="--i:1"><summary>What happens with irregular revenue?</summary><div class="faqr__a">Seasonality and one-offs are separated from the baseline, so a single large invoice does not distort the trend.</div></details>
+        <details class="faqr__q" style="--i:2"><summary>Can I model scenarios?</summary><div class="faqr__a">Yes. Change a hire date, a price, or a payment term and the projection re-runs against the same history.</div></details>
+      </div>
+
+      <div class="faqr__group">
+        <details class="faqr__q" style="--i:0" open><summary>How long does setup take?</summary><div class="faqr__a">About ten minutes. Connect your bank and accounting tool, and the first forecast lands while you are still reading this.</div></details>
+        <details class="faqr__q" style="--i:1"><summary>Which tools connect?</summary><div class="faqr__a">The usual suspects for banking, accounting and billing, plus a webhook for anything that is not on the list.</div></details>
+        <details class="faqr__q" style="--i:2"><summary>Can I import history?</summary><div class="faqr__a">Upload a CSV and it is mapped automatically, with a review step before anything is committed.</div></details>
+        <details class="faqr__q" style="--i:3"><summary>Does it work with multiple entities?</summary><div class="faqr__a">Yes, consolidated or side by side, with per-entity permissions.</div></details>
+      </div>
+
+      <div class="faqr__group">
+        <details class="faqr__q" style="--i:0" open><summary>Where is my data stored?</summary><div class="faqr__a">Encrypted at rest and in transit, in the region you pick at sign-up. Nothing leaves it without you asking.</div></details>
+        <details class="faqr__q" style="--i:1"><summary>Do you train models on my numbers?</summary><div class="faqr__a">No. Your data is never used to train shared models, and that is in the contract, not just the marketing.</div></details>
+        <details class="faqr__q" style="--i:2"><summary>Can I delete everything?</summary><div class="faqr__a">One button, and the export runs first so you keep a copy.</div></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="outro">
+  <p>Past the last category the page carries on as normal. Set <b>loop</b> to true and it wraps back to the first instead, so the rail cycles for as long as the reader keeps scrolling.</p>
+</section>
+
+<script src="faq-rail.js"></script>
+<script src="../../assets/module-page.js"></script>
+<script src="../../assets/controls.js"></script>
+<script>
+  function buildPanel() {
+    if (document.documentElement.classList.contains('wm-embed')) return;
+    const D = FaqRail.DEFAULTS;
+    const panel = WMControls.create({
+      title: 'FAQ Rail',
+      defaults: { perStep: .9, scrollMode: 1, loop: 0, autoOpen: 1 },
+      schema: [
+        { key: 'perStep',    label: 'Scroll per step', hint: 'screens per category', min: .3, max: 2, step: .05 },
+        { key: 'scrollMode', label: 'Scroll mode',     hint: '1 = pin & step, 0 = tabs', min: 0, max: 1, step: 1 },
+        { key: 'loop',       label: 'Loop',            hint: '1 = wrap past the end', min: 0, max: 1, step: 1 },
+        { key: 'autoOpen',   label: 'Auto-open',       hint: '1 = open first question', min: 0, max: 1, step: 1 },
+      ],
+      onChange: (v) => FaqRail.setAll({ perStep: v.perStep, mode: v.scrollMode ? 'scroll' : 'click', loop: !!v.loop, autoOpen: !!v.autoOpen }),
+      snippet: (v) => {
+        const d = {};
+        if (!v.scrollMode) d.mode = 'click';
+        if (v.perStep !== .9) d.perStep = v.perStep;
+        if (v.loop) d.loop = true;
+        if (!v.autoOpen) d.autoOpen = false;
+        const a = Object.keys(d).length ? " data-faq-rail='" + JSON.stringify(d) + "'" : ' data-faq-rail';
+        return '<section class="faqr"' + a + '>\n  <div class="faqr__sticky">\n    <ul class="faqr__rail"><li><button type="button">General</button></li></ul>\n    <div class="faqr__panel">\n      <div class="faqr__group">\n        <details class="faqr__q" open><summary>Question</summary><div class="faqr__a">Answer</div></details>\n      </div>\n    </div>\n  </div>\n</section>';
+      }
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', buildPanel); else buildPanel();
+</script>
+</body>
+</html>

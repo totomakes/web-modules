@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beacon Hero · Web Modules</title>
+<meta name="description" content="A blueprint-grid hero where a centre mark deploys satellite nodes along dotted connectors while the headline resolves character by character. Extracted from oberon.framer.website.">
+<meta name="wm-module" content="beacon-hero">
+<meta name="wm-files" content="beacon-hero.js, beacon-hero.css">
+<meta name="wm-source" content="https://oberon.framer.website/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/module-page.css">
+<link rel="stylesheet" href="beacon-hero.css">
+<style>
+  :root { --ink: #202020; --paper: #f2f0ee; --orange: #e65800; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+  .note { position: fixed; top: 18px; left: 18px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; opacity: .55; z-index: 9; }
+
+  .beacon { min-height: 100vh; display: grid; align-content: center; padding: 14vh clamp(20px, 4vw, 56px) 8vh; }
+  .beacon__content { display: grid; grid-template-columns: 1.25fr .75fr; gap: clamp(24px, 5vw, 80px); align-items: center; }
+  .badge { display: inline-flex; align-items: stretch; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 26px; }
+  .badge b { background: var(--orange); color: #fff; padding: 7px 9px; font-weight: 500; }
+  .badge span { background: rgba(32,32,32,.1); padding: 7px 12px; }
+  h1 { font-family: 'Archivo', system-ui, sans-serif; font-weight: 500; font-size: clamp(40px, 5.6vw, 76px); line-height: 1.02; letter-spacing: -.035em; margin: 0 0 26px; max-width: 15ch; }
+  .sub { font-size: 12px; line-height: 1.75; letter-spacing: .05em; text-transform: uppercase; opacity: .7; max-width: 40ch; margin: 0 0 34px; }
+  .btns { display: flex; gap: 1px; }
+  .btns a { flex: 1; text-align: center; padding: 18px 20px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--ink); color: var(--ink); transition: background .4s cubic-bezier(.2,1,.3,1), color .4s; max-width: 260px; }
+  .btns a:hover { background: var(--ink); color: var(--paper); }
+  .btns a.solid { background: var(--ink); color: var(--paper); }
+  .btns a.solid:hover { background: var(--orange); border-color: var(--orange); color: #fff; }
+
+  .beacon__stage { min-height: 360px; }
+  .beacon__core { font-size: 26px; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: clamp(40px, 7vw, 90px); background: rgba(32,32,32,.14); border-top: 1px solid rgba(32,32,32,.14); }
+  .stats div { background: var(--paper); padding: 22px 4px 0; font-size: 11px; line-height: 1.7; letter-spacing: .06em; text-transform: uppercase; opacity: .75; }
+  .after { min-height: 60vh; display: grid; place-items: center; padding: 10vh 5vw; border-top: 1px solid rgba(32,32,32,.14); }
+  .after p { max-width: 60ch; font-size: 14px; line-height: 1.7; opacity: .75; text-align: center; }
+  @media (max-width: 860px) { .beacon__content { grid-template-columns: 1fr; } .beacon__stage { min-height: 340px; } }
+</style>
+</head>
+<body>
+<div class="note">06 · beacon hero · replay in the panel</div>
+
+<section class="beacon" data-beacon='{"columns":6,"stagger":26}'>
+  <div class="beacon__grid"></div>
+  <div class="beacon__veil"></div>
+
+  <div class="beacon__content">
+    <div>
+      <div class="badge beacon__fade" style="--d:0"><b>01</b><span>intro</span></div>
+      <h1 data-split>Automate client operations with AI systems</h1>
+      <p class="sub beacon__fade" style="--d:1">We build automation systems that reduce manual work and scale execution.</p>
+      <div class="btns beacon__fade" style="--d:2">
+        <a href="#">Schedule an assessment</a>
+        <a href="#" class="solid">How it works</a>
+      </div>
+    </div>
+
+    <div class="beacon__stage">
+      <div class="beacon__core">◪</div>
+      <div class="beacon__node" data-angle="-90" data-dist="120">intake</div>
+      <div class="beacon__node beacon__node--accent" data-angle="-25" data-dist="140">routing</div>
+      <div class="beacon__node" data-angle="55" data-dist="132">reporting</div>
+      <div class="beacon__node" data-angle="140" data-dist="142">crm</div>
+      <div class="beacon__node" data-angle="205" data-dist="118">billing</div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="beacon__fade" style="--d:3">Cut admin time<br>by up to 50%</div>
+    <div class="beacon__fade" style="--d:4">30+ automations<br>launched</div>
+    <div class="beacon__fade" style="--d:5">From lead intake<br>to reporting</div>
+  </div>
+</section>
+
+<section class="after">
+  <p>The hero replays whenever it scrolls back into view. Scroll down and back up, or press Replay in the panel, to watch the grid rule itself, the characters resolve, and the nodes deploy along their connectors.</p>
+</section>
+
+<script src="beacon-hero.js"></script>
+<script src="../../assets/module-page.js"></script>
+<script src="../../assets/controls.js"></script>
+<script>
+  function buildPanel() {
+    if (document.documentElement.classList.contains('wm-embed')) return;
+    const D = BeaconHero.DEFAULTS;
+    const panel = WMControls.create({
+      title: 'Beacon Hero',
+      defaults: D,
+      schema: [
+        { key: 'columns',   label: 'Columns',    hint: 'hairlines across',        min: 2, max: 16, step: 1 },
+        { key: 'stagger',   label: 'Stagger',    hint: 'ms between characters',   min: 0, max: 120, step: 2, unit: 'ms' },
+        { key: 'charDelay', label: 'Text delay', hint: 'ms before the headline',  min: 0, max: 1500, step: 20, unit: 'ms' },
+        { key: 'charDur',   label: 'Text speed', hint: 'ms per character',        min: 100, max: 1600, step: 20, unit: 'ms' },
+        { key: 'rise',      label: 'Rise',       hint: 'px each character lifts', min: 0, max: 60, step: 1, unit: 'px' },
+        { key: 'nodeDelay', label: 'Node delay', hint: 'ms before deploy',        min: 0, max: 2000, step: 20, unit: 'ms' },
+        { key: 'nodeGap',   label: 'Node gap',   hint: 'ms between satellites',   min: 0, max: 400, step: 10, unit: 'ms' },
+        { key: 'spin',      label: 'Drift',      hint: 'deg/s · 0 = still',       min: -12, max: 12, step: .5 },
+      ],
+      onChange: (v) => BeaconHero.setAll(v),
+      snippet: (v) => {
+        const d = {}; Object.keys(D).forEach(k => { if (v[k] !== D[k]) d[k] = v[k]; });
+        const a = Object.keys(d).length ? " data-beacon='" + JSON.stringify(d) + "'" : ' data-beacon';
+        return '<section class="beacon"' + a + '>\n  <div class="beacon__grid"></div>\n  <div class="beacon__veil"></div>\n  <div class="beacon__content">\n    <h1 data-split>Your headline</h1>\n  </div>\n  <div class="beacon__stage">\n    <div class="beacon__core">◪</div>\n    <div class="beacon__node" data-angle="-90" data-dist="120">intake</div>\n  </div>\n</section>';
+      }
+    });
+    // add a Replay button to the panel foot
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'wm-panel__btn'; btn.textContent = 'Replay';
+    btn.addEventListener('click', () => BeaconHero.instances.forEach(i => i.replay()));
+    panel.el.querySelector('.wm-panel__foot').prepend(btn);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', buildPanel); else buildPanel();
+</script>
+</body>
+</html>

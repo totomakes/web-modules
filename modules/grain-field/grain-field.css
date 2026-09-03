@@ -1,0 +1,11 @@
+/* Grain Field — the layer itself. Everything else is set inline by grain-field.js. */
+.grain-field { position: relative; }
+.grain-field > .grain-field__layer {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  background-repeat: repeat;
+  will-change: transform;
+}
+/* keep your own content above the grain */
+.grain-field > *:not(.grain-field__layer) { position: relative; z-index: 2; }

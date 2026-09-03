@@ -1,0 +1,72 @@
+/* Orbit Stack — rings, chips and connectors. Markup + options: see orbit-stack.js */
+
+.orbit {
+  --orbit-ink: #202020;
+  --orbit-paper: #f2f0ee;
+  --orbit-accent: #e65800;
+  --orbit-chip-bg: #fff;
+  --orbit-line: rgba(32, 32, 32, .3);
+  --orbit-size: 70px;
+  --orbit-extent: 700px;
+  position: relative;
+  display: grid; place-items: center;
+  width: 100%;
+  min-height: var(--orbit-extent);
+  isolation: isolate;
+}
+
+/* connectors + ring guides */
+.orbit__links { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0; }
+.orbit__guide { fill: none; stroke: var(--orbit-line); stroke-width: 1; opacity: .28; }
+.orbit__link {
+  stroke: var(--orbit-line); stroke-width: 1; stroke-dasharray: 1.5 6; stroke-linecap: round;
+  opacity: .55; transition: opacity .4s, stroke .4s, stroke-width .4s;
+}
+.orbit--hairline .orbit__link { stroke-dasharray: none; opacity: .3; }
+.orbit.is-focused .orbit__link { opacity: .16; }
+.orbit__link.is-lit { opacity: 1; stroke: var(--orbit-accent); stroke-width: 1.5; }
+.orbit__fan, .orbit__ring {
+  animation: orbit-turn var(--dur, 60s) linear infinite;
+  transform-origin: 50% 50%;
+}
+.orbit__fan.is-still, .orbit__ring.is-still { animation: none; }
+.orbit:hover .orbit__fan, .orbit:hover .orbit__ring { animation-play-state: paused; }
+@keyframes orbit-turn { to { rotate: 360deg; } }
+
+/* rotating layers hold the chips */
+.orbit__ring { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+
+.orbit__chips { list-style: none; margin: 0; padding: 0; display: contents; }
+.orbit__ring > * {
+  position: absolute; left: 50%; top: 50%; pointer-events: auto;
+  width: var(--size, 70px); height: var(--size, 70px);
+  margin: calc(var(--size, 70px) / -2);
+  translate: var(--x) var(--y);
+  display: grid; place-items: center;
+  background: var(--orbit-chip-bg); border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(32,32,32,.08), inset 0 0 0 1px rgba(32,32,32,.09);
+  font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--orbit-ink);
+  transition: box-shadow .5s cubic-bezier(.2,1,.3,1), scale .5s cubic-bezier(.2,1.4,.3,1), opacity .4s;
+}
+.orbit__ring > .orbit__chip--counter { animation: orbit-turn var(--spin-dur, 60s) linear infinite; }
+.orbit:hover .orbit__ring > .orbit__chip--counter { animation-play-state: paused; }
+.orbit.is-focused .orbit__ring > * { opacity: .4; }
+.orbit__ring > *.is-lit { opacity: 1; scale: 1.12; box-shadow: 0 10px 26px -10px rgba(32,32,32,.45), inset 0 0 0 1px var(--orbit-accent); }
+.orbit__ring > * img { width: 55%; height: 55%; object-fit: contain; display: block; }
+.orbit__ring > * span { padding: 0 6px; text-align: center; line-height: 1.1; }
+
+.orbit__core {
+  position: relative; z-index: 2;
+  display: grid; place-items: center;
+  width: calc(var(--orbit-size) * 1.5); height: calc(var(--orbit-size) * 1.5);
+  background: var(--orbit-accent); color: #fff;
+  font-size: 22px;
+  transition: scale .6s cubic-bezier(.2,1.4,.3,1);
+}
+.orbit:hover .orbit__core { scale: 1.05; }
+.orbit__core::after { content: ""; position: absolute; inset: -14px; border: 1px solid var(--orbit-accent); opacity: .3; }
+.orbit__core img { width: 55%; height: 55%; object-fit: contain; }
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit__fan, .orbit__ring, .orbit__ring > * { animation: none !important; }
+}

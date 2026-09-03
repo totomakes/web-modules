@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orbit Stack · Web Modules</title>
+<meta name="description" content="An integrations diagram: logo chips on concentric drifting rings, wired to a centre mark with dotted connectors. Extracted from oberon.framer.website.">
+<meta name="wm-module" content="orbit-stack">
+<meta name="wm-files" content="orbit-stack.js, orbit-stack.css">
+<meta name="wm-source" content="https://oberon.framer.website/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/module-page.css">
+<link rel="stylesheet" href="orbit-stack.css">
+<style>
+  :root { --ink: #202020; --paper: #f2f0ee; --orange: #e65800; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+  .note { position: fixed; top: 18px; left: 18px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; opacity: .55; z-index: 9; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 12vh clamp(20px, 4vw, 56px) 14vh; }
+  .head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 40px; }
+  .badge { display: inline-flex; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 22px; }
+  .badge b { background: var(--orange); color: #fff; padding: 7px 9px; font-weight: 500; }
+  .badge span { background: rgba(32,32,32,.1); padding: 7px 12px; }
+  h1 { font-family: 'Archivo', system-ui, sans-serif; font-weight: 500; font-size: clamp(36px, 5vw, 66px); line-height: 1.02; letter-spacing: -.035em; margin: 0; max-width: 14ch; }
+  .head p { font-size: 12px; line-height: 1.75; letter-spacing: .05em; text-transform: uppercase; opacity: .7; max-width: 40ch; margin: 0; }
+  .orbit { --orbit-extent: 760px; }
+  .legend { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 1px; background: rgba(32,32,32,.14); border: 1px solid rgba(32,32,32,.14); }
+  .legend div { flex: 1 1 160px; background: var(--paper); padding: 18px 16px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; opacity: .75; }
+  @media (max-width: 860px) { .head { grid-template-columns: 1fr; } .orbit { --orbit-extent: 560px; } }
+</style>
+</head>
+<body>
+<div class="note">07 · orbit stack · hover a chip</div>
+
+<main class="wrap">
+  <div class="head">
+    <div>
+      <div class="badge"><b>05</b><span>allstack</span></div>
+      <h1>Everything you already run, wired in.</h1>
+    </div>
+    <p>Chips sit on concentric rings that drift at their own speed and direction. Hover one to light its connector and dim the rest; the whole diagram pauses while you do.</p>
+  </div>
+
+  <div class="orbit" data-orbit='{"rings":[160,270],"speed":54}'>
+    <div class="orbit__core">◪</div>
+    <ul class="orbit__chips">
+      <li data-ring="1"><span>Slack</span></li>
+      <li data-ring="1"><span>Notion</span></li>
+      <li data-ring="1"><span>Stripe</span></li>
+      <li data-ring="1"><span>Linear</span></li>
+      <li data-ring="1"><span>Gmail</span></li>
+      <li data-ring="2"><span>HubSpot</span></li>
+      <li data-ring="2"><span>Sheets</span></li>
+      <li data-ring="2"><span>Airtable</span></li>
+      <li data-ring="2"><span>Zapier</span></li>
+      <li data-ring="2"><span>Drive</span></li>
+      <li data-ring="2"><span>Figma</span></li>
+      <li data-ring="2"><span>Xero</span></li>
+    </ul>
+  </div>
+
+  <div class="legend">
+    <div>Inner ring<br>core systems</div>
+    <div>Outer ring<br>supporting tools</div>
+    <div>Dotted link<br>active route</div>
+    <div>Hover<br>isolate a path</div>
+  </div>
+</main>
+
+<script src="orbit-stack.js"></script>
+<script src="../../assets/module-page.js"></script>
+<script src="../../assets/controls.js"></script>
+<script>
+  function buildPanel() {
+    if (document.documentElement.classList.contains('wm-embed')) return;
+    const D = OrbitStack.DEFAULTS;
+    WMControls.create({
+      title: 'Orbit Stack',
+      defaults: { ring1: 160, ring2: 270, speed: 54, size: D.size, start: D.start },
+      schema: [
+        { key: 'ring1', label: 'Inner ring', hint: 'px radius',            min: 80,  max: 320, step: 5, unit: 'px' },
+        { key: 'ring2', label: 'Outer ring', hint: 'px radius',            min: 140, max: 460, step: 5, unit: 'px' },
+        { key: 'speed', label: 'Drift',      hint: 's per turn · 0 = still', min: 0, max: 180, step: 2, unit: 's' },
+        { key: 'size',  label: 'Chip size',  hint: 'px diameter',          min: 40,  max: 120, step: 2, unit: 'px' },
+        { key: 'start', label: 'Offset',     hint: 'deg of the first chip', min: -180, max: 180, step: 5 },
+      ],
+      onChange: (v) => OrbitStack.setAll({ rings: [v.ring1, v.ring2], speed: v.speed, size: v.size, start: v.start }),
+      snippet: (v) => {
+        const d = {};
+        if (v.ring1 !== 150 || v.ring2 !== 250) d.rings = [v.ring1, v.ring2];
+        if (v.speed !== D.speed) d.speed = v.speed;
+        if (v.size !== D.size) d.size = v.size;
+        if (v.start !== D.start) d.start = v.start;
+        const a = Object.keys(d).length ? " data-orbit='" + JSON.stringify(d) + "'" : ' data-orbit';
+        return '<div class="orbit"' + a + '>\n  <div class="orbit__core"><img src="you.svg" alt="Your product"></div>\n  <ul class="orbit__chips">\n    <li data-ring="1"><img src="slack.svg" alt="Slack"></li>\n    <li data-ring="2"><span>Stripe</span></li>\n  </ul>\n</div>';
+      }
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', buildPanel); else buildPanel();
+</script>
+</body>
+</html>

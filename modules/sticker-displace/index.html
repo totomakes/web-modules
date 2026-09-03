@@ -83,7 +83,8 @@
 <script src="../../assets/controls.js"></script>
 <script>
   // Live tuning panel — every slider updates all stickers AND the markup snippet (values also land in the URL hash).
-  if (!document.documentElement.classList.contains('wm-embed')) {
+  function buildPanel() {
+    if (document.documentElement.classList.contains('wm-embed')) return;
     const D = StickerDisplace.DEFAULTS;
     WMControls.create({
       title: 'Sticker Displace',
@@ -108,6 +109,7 @@
       }
     });
   }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', buildPanel); else buildPanel();
 </script>
 </body>
 </html>
