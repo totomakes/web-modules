@@ -25,6 +25,7 @@
  *
  * Tune with custom properties on .sfoot:
  *   --sfoot-bg, --sfoot-ink, --sfoot-size (font-size), --sfoot-slice-1/2/3 (slice heights, em of the font)
+ *   --sfoot-gap (a cut in the background colour between layers so the copies don't fuse; 0 for the solid look)
  */
 .sfoot {
   --sfoot-bg: #1925aa;
@@ -35,6 +36,7 @@
   --sfoot-slice-2: .5em;
   --sfoot-slice-3: .58em;
   --sfoot-pad: clamp(24px, 4vw, 30px);
+  --sfoot-gap: 3px;
   position: relative;
   background: var(--sfoot-bg);
   color: var(--sfoot-ink);
@@ -51,6 +53,13 @@
   background: var(--sfoot-bg);
   white-space: nowrap;
   color: inherit; text-decoration: none;
+  position: relative;
+}
+/* a thin cut in the background colour across the top of every layer, slicing through the letters,
+   so each stacked copy reads as its own step instead of one fused shape */
+.sfoot__slice::after, .sfoot__cta::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: var(--sfoot-gap);
+  background: var(--sfoot-bg); pointer-events: none;
 }
 .sfoot__slice { height: var(--sfoot-slice-3); }
 .sfoot__slice:nth-child(1) { height: var(--sfoot-slice-1); }
