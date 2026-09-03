@@ -144,7 +144,11 @@
         el.classList.add('is-armed');
         el.classList.remove('is-in');
         void el.offsetWidth;                 // force reflow so the transitions restart
-        requestAnimationFrame(() => el.classList.add('is-in'));
+        const play = () => el.classList.add('is-in');
+        requestAnimationFrame(play);
+        // rAF is suspended in offscreen or heavily clipped iframes (a gallery preview, for one),
+        // which would leave the hero armed and therefore blank. A timer always lands.
+        setTimeout(play, 60);
       },
       set(partial) {
         const rebuild = partial && 'columns' in partial && partial.columns !== opt.columns;
