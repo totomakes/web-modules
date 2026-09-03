@@ -2,7 +2,7 @@
 
 A gallery of web effects and components extracted from sites we like, reverse-engineered from the live DOM and rebuilt as plain drop-in HTML / CSS / JS. No framework, no build step.
 
-Live: https://web-modules-gallery.vercel.app
+Live: https://web-modules-kappa.vercel.app
 
 ## Modules
 
