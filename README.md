@@ -8,7 +8,7 @@ Live: https://web-modules-kappa.vercel.app
 
 | # | Module | From | Files |
 |---|--------|------|-------|
-| 01 | [Sticker Displace](modules/sticker-displace/) — background warp behind stickers (SVG turbulence + `backdrop-filter`) | agenius.framer.website | `sticker-displace.js`, `sticker-displace.css` |
+| 01 | [Sticker Displace](modules/sticker-displace/) — living background warp behind stickers (animated SVG turbulence + `backdrop-filter`), slider panel that rewrites the markup | agenius.framer.website | `sticker-displace.js`, `sticker-displace.css` |
 | 02 | [Expanding Rows](modules/expanding-rows/) — service rows that open with pills + text, `+` → `×` | agenius.framer.website | `expanding-rows.css`, `expanding-rows.js` |
 | 03 | [Circle Text](modules/circle-text/) — spinning text on a circle, reacts to scroll velocity | kaix.framer.website | `circle-text.js`, `circle-text.css` |
 | 04 | [Stacked Footer](modules/stacked-footer/) — CTA word that replicates upward via `position: sticky` | kaix.framer.website | `stacked-footer.css` |
@@ -17,7 +17,7 @@ Live: https://web-modules-kappa.vercel.app
 
 1. Copy the module's files next to your page and include them (they auto-initialise).
 2. Add the markup shown in the header comment of the CSS/JS file.
-3. Tune via `data-*` JSON options or CSS custom properties.
+3. Tune via `data-*` JSON options or CSS custom properties. Demo pages with a slider panel (`assets/controls.js`) keep the snippet and the URL hash in sync, so a tuned preset is copy-able and shareable.
 
 ## Adding a module
 

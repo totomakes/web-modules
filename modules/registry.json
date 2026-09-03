@@ -2,11 +2,19 @@
   {
     "slug": "sticker-displace",
     "name": "Sticker Displace",
-    "summary": "Stickers that warp the background behind them with an animated SVG turbulence + displacement filter through backdrop-filter. Swells on hover.",
-    "tags": ["svg filter", "backdrop-filter", "hover", "js"],
+    "summary": "Stickers that warp the background behind them with a living SVG turbulence + displacement filter through backdrop-filter. The noise flows, swells on hover, and a slider panel tunes every parameter and rewrites the markup.",
+    "tags": [
+      "svg filter",
+      "backdrop-filter",
+      "live controls",
+      "js"
+    ],
     "source": "https://agenius.framer.website/",
     "sourceName": "agenius.framer.website",
-    "files": ["sticker-displace.js", "sticker-displace.css"],
+    "files": [
+      "sticker-displace.js",
+      "sticker-displace.css"
+    ],
     "support": "Chromium, Firefox 103+. Safari ignores url() in backdrop-filter → no warp, sticker still fine.",
     "added": "2026-09-03"
   },
@@ -14,10 +22,18 @@
     "slug": "expanding-rows",
     "name": "Expanding Rows",
     "summary": "Full-width service rows that open to reveal tag pills and a description. The + rotates into ×, pills stagger in, heights animate with grid-template-rows.",
-    "tags": ["accordion", "css grid", "click / hover", "a11y"],
+    "tags": [
+      "accordion",
+      "css grid",
+      "click / hover",
+      "a11y"
+    ],
     "source": "https://agenius.framer.website/",
     "sourceName": "agenius.framer.website",
-    "files": ["expanding-rows.css", "expanding-rows.js"],
+    "files": [
+      "expanding-rows.css",
+      "expanding-rows.js"
+    ],
     "support": "All modern browsers.",
     "added": "2026-09-03"
   },
@@ -25,10 +41,18 @@
     "slug": "circle-text",
     "name": "Circle Text",
     "summary": "Text on a circle that spins, drinks scroll velocity and eases back. Centre slot for an arrow, logo or portrait.",
-    "tags": ["svg textPath", "scroll velocity", "badge", "js"],
+    "tags": [
+      "svg textPath",
+      "scroll velocity",
+      "badge",
+      "js"
+    ],
     "source": "https://kaix.framer.website/",
     "sourceName": "kaix.framer.website",
-    "files": ["circle-text.js", "circle-text.css"],
+    "files": [
+      "circle-text.js",
+      "circle-text.css"
+    ],
     "support": "All modern browsers.",
     "added": "2026-09-03"
   },
@@ -36,10 +60,16 @@
     "slug": "stacked-footer",
     "name": "Stacked Footer",
     "summary": "A huge CTA word that replicates upward as the footer scrolls in: clipped slices rise from behind a sticky link. Pure CSS.",
-    "tags": ["position: sticky", "typography", "css only"],
+    "tags": [
+      "position: sticky",
+      "typography",
+      "css only"
+    ],
     "source": "https://kaix.framer.website/",
     "sourceName": "kaix.framer.website",
-    "files": ["stacked-footer.css"],
+    "files": [
+      "stacked-footer.css"
+    ],
     "support": "All modern browsers.",
     "previewScroll": "bottom",
     "added": "2026-09-03"

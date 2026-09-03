@@ -41,7 +41,7 @@
   .stickers .sticker { position: absolute; pointer-events: auto; }
   .s1 { left: 6%; top: 24%; --sticker-bg: #bfe3c4; --sticker-rot: -22deg; --sticker-delay: -1s; }
   .s2 { left: 48%; top: 40%; --sticker-bg: #f2a6b8; --sticker-rot: 8deg; --sticker-size: 130px; --sticker-delay: -3s; }
-  .s3 { right: 8%; top: 20%; --sticker-bg: #c4b8f2; --sticker-rot: 16deg; --sticker-size: 150px; --sticker-delay: -2s; }
+  .s3 { right: 26%; top: 16%; --sticker-bg: #c4b8f2; --sticker-rot: 16deg; --sticker-size: 150px; --sticker-delay: -2s; }
   .s4 { left: 68%; top: 60%; --sticker-bg: #ffd86b; --sticker-rot: -8deg; --sticker-size: 120px; --sticker-delay: -4s; }
   .note { position: fixed; top: 18px; left: 18px; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; opacity: .55; }
   @media (max-width: 720px) {
@@ -80,5 +80,34 @@
 
 <script src="sticker-displace.js"></script>
 <script src="../../assets/module-page.js"></script>
+<script src="../../assets/controls.js"></script>
+<script>
+  // Live tuning panel — every slider updates all stickers AND the markup snippet (values also land in the URL hash).
+  if (!document.documentElement.classList.contains('wm-embed')) {
+    const D = StickerDisplace.DEFAULTS;
+    WMControls.create({
+      title: 'Sticker Displace',
+      defaults: D,
+      schema: [
+        { key: 'scale',     label: 'Rest scale',   hint: 'px displaced at rest',        min: 0,     max: 40,   step: 0.5 },
+        { key: 'hover',     label: 'Hover scale',  hint: 'px displaced while hovered',  min: 0,     max: 60,   step: 0.5 },
+        { key: 'wobble',    label: 'Wobble',       hint: 'per-frame scale jitter',      min: 0,     max: 3,    step: 0.05 },
+        { key: 'freq',      label: 'Frequency',    hint: 'noise size · higher = finer', min: 0.005, max: 0.3,  step: 0.001 },
+        { key: 'flow',      label: 'Flow',         hint: 'how much the noise drifts',   min: 0,     max: 1,    step: 0.01 },
+        { key: 'speed',     label: 'Speed',        hint: 'animation rate',              min: 0,     max: 4,    step: 0.05 },
+        { key: 'octaves',   label: 'Octaves',      hint: 'noise detail',                min: 1,     max: 5,    step: 1 },
+        { key: 'seedEvery', label: 'Re-seed',      hint: 'ms · 0 = off · crackle',      min: 0,     max: 1000, step: 10, unit: 'ms' },
+        { key: 'spread',    label: 'Spread',       hint: 'px the warp reaches out',     min: 0,     max: 160,  step: 2, unit: 'px' },
+        { key: 'feather',   label: 'Feather',      hint: 'edge softness',               min: 0,     max: 1,    step: 0.01 },
+      ],
+      onChange: (v) => StickerDisplace.setAll(v),
+      snippet: (v) => {
+        const diff = {}; Object.keys(D).forEach(k => { if (v[k] !== D[k]) diff[k] = v[k]; });
+        const attr = Object.keys(diff).length ? " data-displace='" + JSON.stringify(diff) + "'" : ' data-displace';
+        return '<div class="sticker sticker--burst"' + attr + '>\n  <div class="sticker__shape"></div>\n  <span class="sticker__label">Edgy</span>\n</div>';
+      }
+    });
+  }
+</script>
 </body>
 </html>
