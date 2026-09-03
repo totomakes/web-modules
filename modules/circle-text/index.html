@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Circle Text · Web Modules</title>
+<meta name="description" content="Text on a circle that spins, speeds up with scroll velocity and eases back. Inspired by kaix.framer.website.">
+<meta name="wm-module" content="circle-text">
+<meta name="wm-files" content="circle-text.js, circle-text.css">
+<meta name="wm-source" content="https://kaix.framer.website/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/module-page.css">
+<link rel="stylesheet" href="circle-text.css">
+<style>
+  :root { --paper: #e8e6e0; --blue: #1925aa; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--paper); color: var(--blue); font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+  .note { position: fixed; top: 18px; left: 18px; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; opacity: .6; z-index: 2; }
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 40px; padding: 12vh 5vw 8vh; }
+  h1 { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: clamp(80px, 20vw, 300px); line-height: .85; margin: 0; text-transform: uppercase; letter-spacing: -.01em; }
+  .meta { font-size: 12px; line-height: 1.7; text-transform: uppercase; letter-spacing: .04em; margin: 24px 0 0; max-width: 360px; }
+  .badge { width: clamp(160px, 22vw, 260px); height: clamp(160px, 22vw, 260px); }
+  .badge .circle-text__center { background: var(--blue); color: var(--paper); font-size: 32px; font-family: 'Anton', Impact, sans-serif; }
+  .badge-dark { position: fixed; left: 4vw; bottom: 90px; width: 120px; height: 120px; color: var(--paper); z-index: 2; }
+  .badge-dark .circle-text__center { background: var(--paper); color: var(--blue); font-size: 22px; }
+  .badge-dark .circle-text__ring { background: var(--blue); border-radius: 50%; }
+  .scroller { padding: 0 5vw 40vh; max-width: 900px; }
+  .scroller p { font-size: clamp(22px, 3.2vw, 44px); line-height: 1.2; margin: 0 0 1em; text-transform: uppercase; font-family: 'Anton', Impact, sans-serif; opacity: .9; }
+  .scroller small { display: block; font-size: 12px; opacity: .6; margin-bottom: 40px; letter-spacing: .06em; text-transform: uppercase; }
+  @media (max-width: 720px) { .hero { grid-template-columns: 1fr; align-items: start; } }
+</style>
+</head>
+<body>
+<div class="note">03 · circle text · scroll fast, hover the badge</div>
+
+<main>
+  <section class="hero">
+    <div>
+      <h1>Spin<br>Cycle</h1>
+      <p class="meta">Text on an SVG path. It idles at 12°/s, drinks your scroll velocity, and decays back with an exponential ease. Hover slows it to a crawl.</p>
+    </div>
+    <div class="circle-text badge" data-circle-text='{"text":"AVAILABLE FOR FREELANCE • ","speed":14,"scroll":0.4,"fontSize":13,"letterSpacing":1.6}'>
+      <span class="circle-text__center">↗</span>
+    </div>
+  </section>
+
+  <section class="scroller">
+    <small>keep scrolling — the badges react to speed</small>
+    <p>From Tokyo to San Francisco, the badge keeps turning.</p>
+    <p>Scroll hard and it whips around. Stop and it settles, never snapping.</p>
+    <p>The centre slot takes any content: an arrow, a logo, a portrait.</p>
+    <p>Negative speed spins it counter-clockwise. Zero scroll makes it ignore the page.</p>
+    <p>One file. No dependencies. Colour comes from currentColor.</p>
+  </section>
+</main>
+
+<div class="circle-text badge-dark" data-circle-text='{"text":"SCROLL • SCROLL • ","speed":-20,"scroll":0.5,"fontSize":15,"letterSpacing":2,"inset":0.16}'>
+  <span class="circle-text__center">↓</span>
+</div>
+
+<script src="circle-text.js"></script>
+<script src="../../assets/module-page.js"></script>
+</body>
+</html>

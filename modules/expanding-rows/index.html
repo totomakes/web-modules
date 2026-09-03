@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expanding Rows · Web Modules</title>
+<meta name="description" content="Full-width service rows that expand to reveal tag pills and a description, with the + turning into ×. Extracted from agenius.framer.website.">
+<meta name="wm-module" content="expanding-rows">
+<meta name="wm-files" content="expanding-rows.css, expanding-rows.js">
+<meta name="wm-source" content="https://agenius.framer.website/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/module-page.css">
+<link rel="stylesheet" href="expanding-rows.css">
+<style>
+  :root { --paper: #f6e7c6; --ink: #3b001b; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 10vh 5vw 20vh; }
+  .eyebrow { font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; opacity: .6; margin: 0 0 14px; }
+  h1 { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: clamp(44px, 8vw, 120px); line-height: .95; margin: 0 0 60px; text-transform: uppercase; }
+  h1 em { font-style: normal; color: #e0563f; }
+  .xrows { --xrow-pill-bg: #fefae7; }
+  .xrow__title { font-family: 'Anton', Impact, sans-serif; text-transform: uppercase; }
+  .xrow.is-open { background: #fefae7; }
+  .controls { display: flex; gap: 10px; margin: 40px 0 0; font-size: 12px; }
+  .controls button { font: inherit; background: none; border: 1px solid currentColor; color: inherit; padding: 8px 12px; border-radius: 999px; cursor: pointer; }
+  .controls button:hover { background: var(--ink); color: var(--paper); }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <p class="eyebrow">02 · expanding rows · click a row</p>
+  <h1>What we do<br>(and do <em>really</em> well)</h1>
+
+  <ul class="xrows" data-xrows='{"trigger":"click","single":true}'>
+    <li class="xrow is-open">
+      <button class="xrow__top" type="button">
+        <span class="xrow__head"><span class="xrow__title">Branding &amp; Identity</span><span class="xrow__sub">Make your mark — boldly and beautifully.</span></span>
+        <span class="xrow__icon" aria-hidden="true"></span>
+      </button>
+      <div class="xrow__details"><div class="xrow__inner">
+        <ul class="xrow__pills"><li>Logo Design</li><li>Brand Strategy</li><li>Visual Identity</li><li>Brand Guidelines</li><li>Content Marketing</li></ul>
+        <p class="xrow__text">Your brand is so much more than a logo — it's your personality, your story, your vibe. Whether you're just getting started or ready for a glow-up, we craft everything from logos to full-on brand systems.</p>
+      </div></div>
+    </li>
+    <li class="xrow">
+      <button class="xrow__top" type="button">
+        <span class="xrow__head"><span class="xrow__title">Web Design &amp; Development</span><span class="xrow__sub">Pretty and powerful websites that actually work.</span></span>
+        <span class="xrow__icon" aria-hidden="true"></span>
+      </button>
+      <div class="xrow__details"><div class="xrow__inner">
+        <ul class="xrow__pills"><li>UI UX Design</li><li>Custom Development</li><li>Responsive Design</li><li>Maintenance</li><li>Landing Pages</li></ul>
+        <p class="xrow__text">Your website is your digital home — and no one likes a messy or confusing house. From clean code to buttery-smooth interfaces, our sites are crafted to delight users and make sure they stick around.</p>
+      </div></div>
+    </li>
+    <li class="xrow">
+      <button class="xrow__top" type="button">
+        <span class="xrow__head"><span class="xrow__title">Content Creation</span><span class="xrow__sub">Words, visuals, and videos that speak human.</span></span>
+        <span class="xrow__icon" aria-hidden="true"></span>
+      </button>
+      <div class="xrow__details"><div class="xrow__inner">
+        <ul class="xrow__pills"><li>Copywriting</li><li>Photography</li><li>Videography</li><li>Animation</li><li>Brand Story Videos</li><li>Scriptwriting</li></ul>
+        <p class="xrow__text">Great content is your brand's voice, face, and attitude rolled into one. From snappy headlines to slick videos and playful animations, we make your story shine.</p>
+      </div></div>
+    </li>
+    <li class="xrow">
+      <button class="xrow__top" type="button">
+        <span class="xrow__head"><span class="xrow__title">Digital Marketing</span><span class="xrow__sub">Get seen. Get clicks. Get results.</span></span>
+        <span class="xrow__icon" aria-hidden="true"></span>
+      </button>
+      <div class="xrow__details"><div class="xrow__inner">
+        <ul class="xrow__pills"><li>Social Media</li><li>SEO &amp; SEM</li><li>Email Campaigns</li><li>Paid Ads</li><li>Influencer Marketing</li></ul>
+        <p class="xrow__text">It's a big, busy internet out there — let's make sure your brand doesn't get lost in the scroll. Data, creativity, and a bit of digital magic in the right places.</p>
+      </div></div>
+    </li>
+  </ul>
+
+  <div class="controls">
+    <button type="button" data-mode="click">trigger: click</button>
+    <button type="button" data-mode="hover">trigger: hover</button>
+  </div>
+</main>
+
+<script src="expanding-rows.js"></script>
+<script>
+  // demo-only: switch trigger mode by re-initialising
+  document.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => {
+    const list = document.querySelector('.xrows');
+    const clone = list.cloneNode(true);
+    clone.setAttribute('data-xrows', JSON.stringify({ trigger: b.dataset.mode, single: true }));
+    list.replaceWith(clone);
+    ExpandingRows.create(clone);
+  }));
+</script>
+<script src="../../assets/module-page.js"></script>
+</body>
+</html>

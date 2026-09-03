@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sticker Displace · Web Modules</title>
+<meta name="description" content="Stickers that warp the background behind them with an animated SVG displacement filter. Extracted from agenius.framer.website and rebuilt in plain HTML/CSS/JS.">
+<meta name="wm-module" content="sticker-displace">
+<meta name="wm-files" content="sticker-displace.js, sticker-displace.css">
+<meta name="wm-source" content="https://agenius.framer.website/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/module-page.css">
+<link rel="stylesheet" href="sticker-displace.css">
+<style>
+  :root { --paper: #fefae7; --ink: #3b001b; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    min-height: 100vh; background: var(--paper); color: var(--ink);
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    overflow-x: hidden;
+  }
+  /* a ruled texture behind everything, so the warp is visible even off the letters */
+  .rules {
+    position: fixed; inset: 0; pointer-events: none; opacity: .5;
+    background-image: linear-gradient(rgba(59,0,27,.14) 1px, transparent 1px);
+    background-size: 100% 22px;
+  }
+  .hero { position: relative; min-height: 100vh; display: grid; place-items: center; padding: 8vh 4vw; }
+  .headline {
+    position: relative; margin: 0; text-align: center;
+    font-family: 'Anton', Impact, sans-serif; font-size: clamp(88px, 22vw, 340px); line-height: .9;
+    letter-spacing: -.01em; color: var(--ink); text-transform: uppercase;
+  }
+  .sub { margin: 26px auto 0; max-width: 520px; text-align: center; font-size: 14px; line-height: 1.6; opacity: .75; }
+  .sub b { font-weight: 500; }
+  /* place stickers over the headline, like the reference */
+  .stickers { position: absolute; inset: 0; pointer-events: none; }
+  .stickers .sticker { position: absolute; pointer-events: auto; }
+  .s1 { left: 6%; top: 24%; --sticker-bg: #bfe3c4; --sticker-rot: -22deg; --sticker-delay: -1s; }
+  .s2 { left: 48%; top: 40%; --sticker-bg: #f2a6b8; --sticker-rot: 8deg; --sticker-size: 130px; --sticker-delay: -3s; }
+  .s3 { right: 8%; top: 20%; --sticker-bg: #c4b8f2; --sticker-rot: 16deg; --sticker-size: 150px; --sticker-delay: -2s; }
+  .s4 { left: 68%; top: 60%; --sticker-bg: #ffd86b; --sticker-rot: -8deg; --sticker-size: 120px; --sticker-delay: -4s; }
+  .note { position: fixed; top: 18px; left: 18px; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; opacity: .55; }
+  @media (max-width: 720px) {
+    .s1 { left: 2%; top: 18%; --sticker-size: 110px; }
+    .s2 { left: 60%; top: 34%; --sticker-size: 96px; }
+    .s3 { right: 2%; top: 60%; --sticker-size: 110px; }
+    .s4 { left: 14%; bottom: 22%; --sticker-size: 90px; }
+  }
+</style>
+</head>
+<body>
+<div class="rules" aria-hidden="true"></div>
+<div class="note">01 · sticker displace · hover a sticker</div>
+
+<main class="hero">
+  <div>
+    <h1 class="headline">Sticker<br>Warp</h1>
+    <p class="sub">Each sticker carries an invisible overlay with <b>backdrop-filter: url(#turbulence)</b>. The displacement scale jitters every frame, so the background behind the sticker shimmers like heat haze — and swells when you hover.</p>
+  </div>
+
+  <div class="stickers">
+    <div class="sticker sticker--flower s1" data-displace='{"scale":4,"hover":18,"spread":56}'>
+      <div class="sticker__shape"></div><span class="sticker__label">Timeless</span>
+    </div>
+    <div class="sticker sticker--cloud s2" data-displace='{"scale":4,"hover":16,"spread":48}'>
+      <div class="sticker__shape"></div><span class="sticker__label">Creative</span>
+    </div>
+    <div class="sticker sticker--burst s3" data-displace='{"scale":5,"hover":22,"spread":60}'>
+      <div class="sticker__shape"></div><span class="sticker__label">Edgy</span>
+    </div>
+    <div class="sticker sticker--blob s4" data-displace='{"scale":3,"hover":14,"spread":44}'>
+      <div class="sticker__shape"></div><span class="sticker__label">Bold</span>
+    </div>
+  </div>
+</main>
+
+<script src="sticker-displace.js"></script>
+<script src="../../assets/module-page.js"></script>
+</body>
+</html>

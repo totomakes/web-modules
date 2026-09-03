@@ -1,0 +1,81 @@
+/*
+ * Expanding Rows — full-width service rows that open to reveal tag pills + a description.
+ * Extracted from: https://agenius.framer.website/ ("What we do" services list)
+ * Structure found in the source: Container > Top (Heading & Subheading, + icon) + Details Container (Sub Services pills, text)
+ *
+ * Markup:
+ *   <ul class="xrows" data-xrows='{"trigger":"click","single":true}'>
+ *     <li class="xrow">
+ *       <button class="xrow__top" type="button" aria-expanded="false">
+ *         <span class="xrow__head"><span class="xrow__title">Branding</span><span class="xrow__sub">Make your mark.</span></span>
+ *         <span class="xrow__icon" aria-hidden="true"></span>
+ *       </button>
+ *       <div class="xrow__details"><div class="xrow__inner">
+ *         <ul class="xrow__pills"><li>Logo</li><li>Strategy</li></ul>
+ *         <p class="xrow__text">…</p>
+ *       </div></div>
+ *     </li>
+ *   </ul>
+ *
+ * Options via data-xrows JSON: trigger "click" | "hover" (default click), single true = accordion (default true)
+ * Animation: grid-template-rows 0fr → 1fr (no fixed heights), + icon rotates into ×, pills stagger in.
+ */
+.xrows {
+  --xrow-ink: #3b001b;
+  --xrow-line: currentColor;
+  --xrow-accent: #fefae7;
+  --xrow-pill-bg: #fefae7;
+  --xrow-ease: cubic-bezier(.2, 1, .3, 1);
+  --xrow-dur: .7s;
+  list-style: none; margin: 0; padding: 0; color: var(--xrow-ink);
+}
+.xrow { border-bottom: 1px solid var(--xrow-line); }
+.xrow:first-child { border-top: 1px solid var(--xrow-line); }
+
+.xrow__top {
+  appearance: none; background: none; border: 0; width: 100%; cursor: pointer;
+  color: inherit; font: inherit; text-align: left;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  padding: 28px 8px;
+  transition: padding var(--xrow-dur) var(--xrow-ease), background .4s var(--xrow-ease);
+}
+.xrow__top:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }
+.xrow.is-open .xrow__top { padding-left: 20px; padding-right: 20px; }
+.xrow__head { display: grid; gap: 6px; }
+.xrow__title { font-size: clamp(26px, 4vw, 52px); line-height: 1; font-weight: 400; letter-spacing: -.01em; }
+.xrow__sub { font-size: 14px; opacity: .7; }
+
+/* the + that becomes × */
+.xrow__icon { position: relative; flex: none; width: 34px; height: 34px; transition: transform var(--xrow-dur) var(--xrow-ease); }
+.xrow__icon::before, .xrow__icon::after {
+  content: ""; position: absolute; inset: 50% auto auto 50%; translate: -50% -50%;
+  background: currentColor; border-radius: 2px;
+}
+.xrow__icon::before { width: 100%; height: 3px; }
+.xrow__icon::after  { width: 3px; height: 100%; }
+.xrow.is-open .xrow__icon { transform: rotate(135deg); }
+
+/* details: grid-rows trick → animates from 0 to natural height */
+.xrow__details {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows var(--xrow-dur) var(--xrow-ease);
+}
+.xrow__inner { overflow: hidden; min-height: 0; }
+.xrow.is-open .xrow__details { grid-template-rows: 1fr; }
+.xrow__inner > * { opacity: 0; translate: 0 10px; transition: opacity .5s var(--xrow-ease), translate .6s var(--xrow-ease); }
+.xrow.is-open .xrow__inner > * { opacity: 1; translate: 0 0; transition-delay: .12s; }
+
+.xrow__pills { list-style: none; margin: 0 0 22px; padding: 0 20px; display: flex; flex-wrap: wrap; gap: 8px; }
+.xrow__pills li {
+  padding: 9px 14px; border-radius: 10px; background: var(--xrow-pill-bg);
+  font-size: 13px; line-height: 1; white-space: nowrap;
+  opacity: 0; translate: 0 8px; scale: .96;
+  transition: opacity .45s var(--xrow-ease), translate .6s var(--xrow-ease), scale .6s var(--xrow-ease);
+}
+.xrow.is-open .xrow__pills li { opacity: 1; translate: 0 0; scale: 1; transition-delay: calc(.1s + var(--i, 0) * .05s); }
+.xrow__text { margin: 0; padding: 0 20px 30px; max-width: 62ch; font-size: 16px; line-height: 1.55; }
+
+@media (prefers-reduced-motion: reduce) {
+  .xrows { --xrow-dur: .01s; }
+  .xrow__inner > *, .xrow__pills li { transition-duration: .01s; }
+}
