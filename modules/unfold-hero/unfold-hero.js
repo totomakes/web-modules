@@ -72,7 +72,7 @@
         c.style.transform =
           'translate3d(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px,0) ' +
           'rotate(' + rot.toFixed(2) + 'deg) scale(' + sc.toFixed(4) + ')';
-        c.style.opacity = (0.25 + 0.75 * e).toFixed(3);
+        c.style.opacity = (0.6 + 0.4 * e).toFixed(3);   // scattered cards stay readable, like the source
       });
     }
 

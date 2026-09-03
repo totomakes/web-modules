@@ -14,7 +14,7 @@
   color: var(--faqr-ink);
 }
 /* in scroll mode the section is tall and its inner block pins */
-.faqr--scroll .faqr__sticky { position: sticky; top: 0; min-height: 100vh; display: grid; align-content: center; }
+.faqr--scroll .faqr__sticky { position: sticky; top: 0; min-height: 100vh; display: grid; align-content: start; padding-top: max(4vh, calc(50vh - 340px)); }
 .faqr__sticky { display: grid; grid-template-columns: 296px 1fr; gap: 0; padding: 4vh 0; align-items: start; }
 
 /* ── the rail ─────────────────────────────────────────────────────── */
@@ -59,8 +59,10 @@
 
 .faqr__q {
   background: var(--faqr-card); border-radius: 16px; padding: 24px 36px;
-  transition: border-radius .5s var(--faqr-ease);
+  box-sizing: border-box;
+  transition: border-radius .5s var(--faqr-ease), background .4s var(--faqr-ease);
 }
+.faqr__q:not([open]):hover { background: color-mix(in srgb, var(--faqr-card) 92%, var(--faqr-ink)); }
 .faqr__q > summary {
   list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 20px;
   font-size: 17px; line-height: 1.4; font-weight: 500;
@@ -74,9 +76,9 @@
 }
 .faqr__q[open] > summary::after { rotate: -135deg; translate: 0 3px; }
 .faqr__a { padding-top: 14px; font-size: 15px; line-height: 1.6; color: var(--faqr-muted); max-width: 70ch; }
-/* animate the answer open without measuring heights */
-.faqr__q[open] .faqr__a { animation: faqr-open .5s var(--faqr-ease) both; }
-@keyframes faqr-open { from { opacity: 0; translate: 0 -6px; } to { opacity: 1; translate: 0 0; } }
+/* the answer fades in slightly after the height starts moving */
+.faqr__a { opacity: 0; translate: 0 -4px; transition: opacity .35s var(--faqr-ease) .08s, translate .45s var(--faqr-ease) .08s; }
+.faqr__q[open] .faqr__a { opacity: 1; translate: 0 0; }
 
 @media (max-width: 900px) {
   .faqr__sticky { grid-template-columns: 1fr; }

@@ -114,13 +114,40 @@
       });
     });
 
-    // one open question at a time inside a group
-    el.addEventListener('toggle', (e) => {
-      const q = e.target;
-      if (!q.classList || !q.classList.contains('faqr__q') || !q.open || !opt.single) return;
-      const group = q.closest('.faqr__group');
-      group.querySelectorAll('.faqr__q[open]').forEach(o => { if (o !== q) o.open = false; });
-    }, true);
+    // Native <details> snaps open and shut, which jolts the panel height and everything under it.
+    // Animate the height ourselves: open → grow from the summary to the full height, close → the
+    // reverse, then let the native state catch up when the animation ends.
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function animateQ(q, open) {
+      if (q.__anim) q.__anim.cancel();
+      const answer = q.querySelector('.faqr__a');
+      const from = q.offsetHeight;
+      q.style.overflow = 'hidden';
+      if (open) q.open = true;
+      // measure the destination for real instead of adding paddings up by hand
+      q.style.height = 'auto';
+      if (!open) answer.style.display = 'none';
+      const to = q.offsetHeight;
+      if (!open) answer.style.display = '';
+      q.style.height = from + 'px';
+      const dur = reduce.matches ? 0 : 480;
+      q.__anim = q.animate([{ height: from + 'px' }, { height: to + 'px' }], { duration: dur, easing: 'cubic-bezier(.2,1,.3,1)' });
+      q.__anim.onfinish = q.__anim.oncancel = () => {
+        q.__anim = null; q.style.height = ''; q.style.overflow = '';
+        if (!open) q.open = false;
+      };
+    }
+    el.addEventListener('click', (e) => {
+      const summary = e.target.closest('.faqr__q > summary');
+      if (!summary) return;
+      e.preventDefault();
+      const q = summary.parentElement;
+      const willOpen = !q.open;
+      if (willOpen && opt.single) {
+        q.closest('.faqr__group').querySelectorAll('.faqr__q[open]').forEach(o => { if (o !== q) animateQ(o, false); });
+      }
+      animateQ(q, willOpen);
+    });
 
     sizeTrack(); go(0);
 

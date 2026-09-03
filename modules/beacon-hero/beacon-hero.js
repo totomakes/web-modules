@@ -36,6 +36,10 @@
  * API: BeaconHero.init(sel) → instances; inst.replay() re-runs the entrance; inst.set({...})
  * Fails open by design: the pre-entrance state is applied only after JS arms the hero, a timer
  * plays it even if the observer never fires, and inside an iframe it renders the finished state.
+ * To avoid a flash of the assembled hero before this script loads, add this one line to <head>:
+ *   <script>document.documentElement.classList.add('js')</script>
+ * With it, the hidden state applies from the first paint; a CSS-only timeout still reveals
+ * everything after 2.5s if the script never arrives.
  * Everything degrades to visible-and-still under prefers-reduced-motion.
  */
 (function () {
@@ -142,9 +146,15 @@
         if (opt.spin < 0) el.style.setProperty('--beacon-spin-dir', 'reverse');
         chars.forEach((c, i) => c.style.setProperty('--i', i));
       },
-      replay() {
-        el.classList.add('is-armed');
+      arm() {
+        // snap to the pre-entrance state with transitions suppressed, so nothing fades OUT
+        el.classList.add('is-arming', 'is-armed');
         el.classList.remove('is-in');
+        void el.offsetWidth;                 // commit the hidden state
+        el.classList.remove('is-arming');
+      },
+      replay() {
+        inst.arm();
         void el.offsetWidth;                 // force reflow so the transitions restart
         const play = () => el.classList.add('is-in');
         requestAnimationFrame(play);
@@ -172,7 +182,7 @@
     // or scaled (a thumbnail preview, say), which would strand the entrance mid-flight. There we
     // skip arming entirely and render the finished hero.
     if (window.self !== window.top) return inst;
-    el.classList.add('is-armed');
+    inst.arm();
     let played = false;
     const go = () => { if (played) return; played = true; inst.replay(); };
     if ('IntersectionObserver' in window) {
